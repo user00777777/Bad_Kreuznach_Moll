@@ -1,0 +1,8 @@
+.mainHeader {
+  width: 100%;
+  height: 60px;background-color: green;}
+  .mainContainer{
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: yellow;
+  }
