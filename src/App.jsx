@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Homepage from './Components/Homepage/Homepage.jsx'
 import Layout from './MainforApp/Layout/Layout.jsx';
+import Dropdown from './Components/Dropdown/Dropdown.jsx'
+import DropDowninside from './Components/Dropdown/DropDowninside.jsx';
 function App() {
   const [count, setCount] = useState(0)
  
@@ -17,7 +18,8 @@ function App() {
 <Route path='/' element={<Layout/>} >
 
 <Route index element={<Homepage />} />
-{/* <Route path='t' element={<T />} /> */}
+<Route  path='dropdown' element={<Dropdown />} />
+<Route path='dropDowninside' element={<DropDowninside />} />
 
 </Route>
 </Routes>

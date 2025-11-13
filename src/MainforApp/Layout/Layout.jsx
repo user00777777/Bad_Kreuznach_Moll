@@ -6,8 +6,8 @@ const Layout = () => {
   return (
     <><header className={s.mainHeader}>
 
-        <Link to='/'>Home</Link>
-				<Link to='/t'> Тельфера </Link>
+        <Link to='/'>Müll abholen in Bad Kreuznach</Link>
+				{/* <Link to='/t'> Тельфера </Link> */}
 
     </header>
     

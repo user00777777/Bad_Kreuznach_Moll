@@ -14,34 +14,10 @@ body {
   width: 100%;
   height: 100vh;
   background-color:rgb(206, 111, 111);
+  text-align: center;
 
 }
-@media (min-width: 480px) {
-  .app {
-    font-family: sans-serif;
-    text-align: center;
-    width: 200px;
-    height: 100vh;
-    background-color: rgb(88, 184, 152);
-  }
-}
 
 
-/* header{
 
-width: 200px;
-height: 200px;
-background-color: red;
-}
 
-.container{
-  width: 100%;
-  height: 100vh;
-  background-color: rgb(255, 255, 255);
-}
- */
- .home{
-  width: 100%;
-  height: 100vh;
-  background-color: rgb(89, 89, 143);
- }
