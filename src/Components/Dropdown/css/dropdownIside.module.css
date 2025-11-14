@@ -32,14 +32,26 @@ body {
   }
   
   .day:hover {
-    background-color: #2980b9;
+    background-color: #957575;
+  }
+.highlight1{
+    background-color: #e74c3c;
+  }
+.highlight2{
+    background-color: #3ce756;
+  }
+.highlight3{
+    background-color: #818aa2;
+  }
+.highlight4{
+    background-color: #805d87;
   }
   
   /* Адаптация для маленьких экранов (например, смартфонов) */
   @media (max-width: 600px) {
     .month-grid {
-      grid-template-columns: repeat(7, 1fr); /* 7 колонок по-прежнему */
-      grid-template-rows: repeat(5, 1fr);
+      grid-template-columns: repeat(7, 100px);
+      grid-template-rows: repeat(5, 200px);
       gap: 3px;
     }
   
