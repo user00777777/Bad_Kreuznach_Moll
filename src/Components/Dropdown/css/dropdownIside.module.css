@@ -1,76 +1,57 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
-  }
-  
-  .monthGrid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 колонок (для дней недели) */
-    grid-template-rows: repeat(5, 1fr); /* 5 рядов (для 31 дня) */
-    gap: 5px; /* Отступы между квадратиками */
-    width: 90vw; /* Занимает 90% ширины экрана */
-    max-width: 500px; /* Максимальная ширина */
-    margin: 0 auto;
-  }
-  
-  .day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #3498db;
-    color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 15px;
-    box-sizing: border-box;
-    transition: background-color 0.3s;
-  }
-  
-  .day:hover {
-    background-color: #957575;
-  }
-.highlight1{
-    background-color: #e74c3c;
-  }
-.highlight2{
-    background-color: #3ce756;
-  }
-.highlight3{
-    background-color: #818aa2;
-  }
-.highlight4{
-    background-color: #805d87;
-  }
-  
-  /* Адаптация для маленьких экранов (например, смартфонов) */
-  @media (max-width: 600px) {
-    .monthGrid {
-      grid-template-columns: repeat(7, 1fr); /* 7 колонок */
-      grid-template-rows: repeat(5, 70px);/* 5 рядов с фиксированной высотой */
-      gap: 3px; /* Отступы между квадратиками */
-    }
-  
-    .day {
-      font-size: 12px;
-      padding: 10px;
-    }
-  }
-  
-  /* Для экранов с шириной более 600px (например, ПК) */
-  @media (min-width: 601px) {
-    .month-grid {
-      grid-template-columns: repeat(7, 1fr); /* 7 колонок */
-      grid-template-rows: repeat(5, 1fr); /* 5 рядов */
-    }
-  
-    .day {
-      font-size: 16px;
-      padding: 15px;
-    }
-  }
-  
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 колонок для дней недели */
+  gap: 10px; /* Отступы между квадратиками */
+  width: 90vw; /* Занимает 90% ширины экрана */
+  max-width: 500px; /* Максимальная ширина */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #414141;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: background-color 0.3s;
+}
+
+.day:hover {
+  background-color: #957575;
+}
+
+/* Стили для типов отходов */
+.restabfall {
+  background-color: #e74c3c; /* Красный для restabfall */
+}
+
+.altpapier {
+  background-color: #3ce756; /* Зеленый для altpapier */
+}
+
+.bioabfall {
+  background-color: #818aa2; /* Синий для bioabfall */
+}
+
+/* Стиль для выделения сегодняшнего дня */
+.today {
+  color: #200303;
+  font-size: 19px;
+  border: 2px solid transparent;
+  background-color: #a06b6b; /* Оранжевый для сегодняшнего дня */
+  font-weight: bold; /* Сделаем текст жирным для выделения */
+  border-color: #e7e0e0; /* Яркая граница вокруг сегодняшнего дня */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Более выраженная тень для сегодняшнего дня */
+}
+
+/* Стили для изображений */
+.image {
+  width: 20px; /* Устанавливаем размер изображения */
+  height: auto;
+  margin-top: 5px; /* Отступ сверху */
+}
