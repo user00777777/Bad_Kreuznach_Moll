@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useStore from '../../State/Strasse/Strasse'; 
 import DropDowninside from './DropDowninside';
+import s from './css/dropDown.module.css';
 
 export default function Dropdown() {
   const { register, handleSubmit, watch } = useForm();
@@ -58,21 +59,9 @@ export default function Dropdown() {
     }
   };
 
-  // Функция для отображения дней из массива
-  const renderDays = (days) => {
-    if (days && days.length > 0) {
-      return (
-        <ul>
-          {days.map((day, index) => (
-            <li key={index}>День {day}</li>
-          ))}
-        </ul>
-      );
-    }
-    return <p>Нет данных о днях</p>;
-  };
 
-  return (
+  return (<div className={s.container}>
+  
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="option">Выберите улицу:</label>
       <select {...register('option')}>
@@ -89,9 +78,11 @@ export default function Dropdown() {
       {message && <p>{message}</p>}
 
       {/* Отображаем информацию об улице, если она найдена */}
+    </form>
+    
       {streetInfo && <DropDowninside {...streetInfo}/>
  
       }
-    </form>
+    </div>
   );
 }

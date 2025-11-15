@@ -4,9 +4,11 @@
   gap: 10px; /* Отступы между квадратиками */
   width: 90vw; /* Занимает 90% ширины экрана */
   max-width: 500px; /* Максимальная ширина */
-  margin: 0 auto;
-  padding: 20px;
+  padding: 20px 0px;
+  box-sizing: border-box; /* Учитываем padding в расчетах ширины */
+  place-items: center; /* Центрируем элементы по горизонтали и вертикали */
 }
+
 
 .day {
   display: flex;
@@ -16,8 +18,10 @@
   color: white;
   border-radius: 5px;
   font-size: 16px;
-  padding: 15px;
-  box-sizing: border-box;
+  width: 60px;  /* Фиксированная ширина для контейнера */
+  height: 60px; /* Фиксированная высота для контейнера */
+  padding: 0; /* Убираем лишние отступы, чтобы сохранить фиксированный размер */
+  position: relative;
   transition: background-color 0.3s;
 }
 
@@ -43,15 +47,62 @@
   color: #200303;
   font-size: 19px;
   border: 2px solid transparent;
-  background-color: #a06b6b; /* Оранжевый для сегодняшнего дня */
+  background-color: #f9e8e8; /* Оранжевый для сегодняшнего дня */
   font-weight: bold; /* Сделаем текст жирным для выделения */
   border-color: #e7e0e0; /* Яркая граница вокруг сегодняшнего дня */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Более выраженная тень для сегодняшнего дня */
+  box-shadow: 0 6px 9px rgba(255, 255, 255, 0.3); /* Более выраженная тень для сегодняшнего дня */
 }
 
 /* Стили для изображений */
 .image {
-  width: 20px; /* Устанавливаем размер изображения */
-  height: auto;
-  margin-top: 5px; /* Отступ сверху */
+  width: 20px; /* Устанавливаем фиксированный размер */
+  height: 20px; /* Устанавливаем фиксированный размер */
+  object-fit: contain; /* Изображение не должно выходить за пределы */
+  display: block;
+  position: absolute; /* Позиционируем изображение относительно родительского контейнера */
+  top: 5px;  /* Позиция сверху */
+  right: 5px; /* Позиция справа */
+}
+
+/* Адаптация для маленьких экранов (например, смартфонов) */
+@media (max-width: 600px) {
+  .monthGrid {
+    grid-template-columns: repeat(7, 1fr); /* 7 колонок */
+    grid-template-rows: repeat(5, 70px); /* 5 рядов с фиксированной высотой */
+    gap: clamp(0.125rem, -0.055rem + 0.74vw, 0.5rem); /* Отступы между квадратиками */
+  }
+
+  .day {
+    width: clamp(2.813rem, -0.047rem + 11.79vw, 4.375rem); /* Уменьшаем ширину для мобильных */
+    height: 50px; /* Уменьшаем высоту для мобильных */
+    font-size:clamp(0.75rem, 0.064rem + 2.83vw, 1.125rem)
+  }
+
+  .image {
+    width: 15px; /* Уменьшаем размер изображения */
+    height: 15px; /* Уменьшаем размер изображения */
+  }
+
+  .today {
+    font-size: 16px;
+  }
+}
+
+/* Для экранов с шириной более 600px (например, ПК) */
+@media (min-width: 601px) {
+  .monthGrid {
+    grid-template-columns: repeat(7, 1fr); /* 7 колонок */
+    grid-template-rows: repeat(5, 1fr); /* 5 рядов */
+  }
+
+  .day {
+    width: clamp(4.063rem, 3.122rem + 2.5vw, 5rem);  /* Устанавливаем фиксированную ширину для квадратиков */
+    height: 70px; /* Устанавливаем фиксированную высоту для квадратиков */
+    font-size: 18px;
+  }
+
+  .image {
+    width: 20px; /* Устанавливаем фиксированную ширину для изображений */
+    height: 20px; /* Устанавливаем фиксированную высоту для изображений */
+  }
 }

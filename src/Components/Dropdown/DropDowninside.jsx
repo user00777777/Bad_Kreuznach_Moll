@@ -4,10 +4,13 @@ import s from './css/dropdownIside.module.css';
 import allImg from '/src/Components/Dropdown/Foto/all.png';
 import altpapierImg from '/src/Components/Dropdown/Foto/altPapier.png';
 import bioImg from '/src/Components/Dropdown/Foto/bio.png';
+import alle_Moll from '/src/Components/Dropdown/Foto/rest.png';
 
 export default function DropDowninside({ name, date }) {
-  const [a] = date;
-  const { restabfall, altpapier, bioabfall } = a;
+  const [alleMoll] = date;
+  const { restabfall, altpapier, bioabfall,schadstoff } = alleMoll;
+
+console.log(schadstoff);
 
   const todayDay = new Date().getDate();
 
@@ -16,6 +19,7 @@ export default function DropDowninside({ name, date }) {
     if (restabfall.days.includes(day)) classNames += `${s.restabfall} `;
     if (altpapier.days.includes(day)) classNames += `${s.altpapier} `;
     if (bioabfall.days.includes(day)) classNames += `${s.bioabfall} `;
+    if (schadstoff.days.includes(day)) classNames += `${s.schadstoff} `;
     if (day === todayDay) classNames += `${s.today} `;
     return classNames.trim();
   };
@@ -24,6 +28,7 @@ export default function DropDowninside({ name, date }) {
     if (restabfall.days.includes(day)) return <img src={allImg} className={s.image} />;
     if (altpapier.days.includes(day)) return <img src={altpapierImg} className={s.image} />;
     if (bioabfall.days.includes(day)) return <img src={bioImg} className={s.image} />;
+    if (schadstoff.days.includes(day)) return <img src={alle_Moll} className={s.image} />;
     return null;
   };
 
