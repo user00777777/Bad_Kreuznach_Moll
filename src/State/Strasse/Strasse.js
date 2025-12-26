@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import dateF from './schedules/schedules'; // Ваша функция для получения даты
+import getSchedules from './schedules/schedules';
 
 // Вынесли массив с улицами в отдельную переменную
 const initialStreets = [
@@ -7,7 +7,7 @@ const initialStreets = [
     name: 'Mannheimer', 
     postalCode: '55545', 
     city: 'Bad Kreuznach', 
-    date: dateF(), 
+    date: getSchedules(), 
     range1: { start: 1, end: 67 }, // Диапазон 1
     range2: { start: 2, end: 98 }, // Диапазон 2
   },
@@ -15,7 +15,7 @@ const initialStreets = [
     name: 'Пушкина', 
     postalCode: '654321', 
     city: 'Санкт-Петербург',
-    date: dateF(),
+    date: getSchedules(),
     // Нет диапазонов для "Пушкина"
   },
 ];
