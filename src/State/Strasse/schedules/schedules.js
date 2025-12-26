@@ -20,19 +20,14 @@ const wasteSchedule = {
 const january2026Schedule = {
   month: "January",
   year: 2026,
-  schadstoff: {
-    time: "13:15-14:15",
-    ort: "Parkhaus",
-    days: [2, 6, 9, 16, 23, 30]
-  },
   restabfall: {
-    days: [2, 16, 30]
+    days: []
   },
   altpapier: {
-    days: [7, 21]
+    days: []
   },
   bioabfall: {
-    days: [9, 23]
+    days: []
   }
 };
 
