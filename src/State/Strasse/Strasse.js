@@ -10,14 +10,8 @@ const initialStreets = [
     date: getSchedules(), 
     range1: { start: 1, end: 67 }, // Диапазон 1
     range2: { start: 2, end: 98 }, // Диапазон 2
-  },
-  { 
-    name: 'Пушкина', 
-    postalCode: '654321', 
-    city: 'Санкт-Петербург',
-    date: getSchedules(),
-    // Нет диапазонов для "Пушкина"
-  },
+  }
+
 ];
 
 const useStore = create((set, get) => ({
