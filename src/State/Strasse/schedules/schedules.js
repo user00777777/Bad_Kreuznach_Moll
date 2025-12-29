@@ -1,3 +1,22 @@
+const december2025Schedule = {
+  month: "December",
+  year: 2025,
+  schadstoff: {
+    time: "10:30 - 11:15",
+    ort: "Holzmarkt, Bad Kreuznach",
+    days: [29]
+  },
+  restabfall: {
+    days: [3,17]
+  },
+  altpapier: {
+    days: [11]
+  },
+  bioabfall: {
+    days: [10,29]
+  }
+};
+
 const january2026Schedule = {
   month: "January",
   year: 2026,
@@ -227,5 +246,5 @@ const december2026Schedule = {
 };
 
 export default function getSchedules() {
-  return [january2026Schedule, february2026Schedule, march2026Schedule, april2026Schedule, may2026Schedule, june2026Schedule, july2026Schedule, august2026Schedule, september2026Schedule, october2026Schedule, november2026Schedule, december2026Schedule];
+  return [december2025Schedule, january2026Schedule, february2026Schedule, march2026Schedule, april2026Schedule, may2026Schedule, june2026Schedule, july2026Schedule, august2026Schedule, september2026Schedule, october2026Schedule, november2026Schedule, december2026Schedule];
 }

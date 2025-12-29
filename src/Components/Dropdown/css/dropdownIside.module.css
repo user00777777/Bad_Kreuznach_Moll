@@ -1,13 +1,6 @@
-.monthGrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 колонок для дней недели */
-  gap: 10px; /* Отступы между квадратиками */
-  width: 90vw; /* Занимает 90% ширины экрана */
-  max-width: 500px; /* Максимальная ширина */
-  padding: 20px 0px;
-  box-sizing: border-box; /* Учитываем padding в расчетах ширины */
-  place-items: center; /* Центрируем элементы по горизонтали и вертикали */
-}
+/* ======================================================
+   CONTAINER
+====================================================== */
 
 .calendarContainer {
   display: flex;
@@ -16,176 +9,151 @@
   width: 100%;
 }
 
+/* ======================================================
+   NAVIGATION
+====================================================== */
+
 .monthNavigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 90vw;
-  max-width: 500px;
-  margin-bottom: 20px;
+  max-width: 520px;
+  margin-bottom: 14px;
   padding: 0 10px;
 }
 
 .navButton {
   background-color: #414141;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   padding: 8px 12px;
-  cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.navButton:hover:not(:disabled) {
-  background-color: #957575;
-}
-
-.navButton:disabled {
-  background-color: #666;
-  cursor: not-allowed;
-  opacity: 0.5;
+  cursor: pointer;
 }
 
 .monthTitle {
-  color: white;
-  margin: 0;
   font-size: 18px;
-  text-align: center;
+  color: #240000;
 }
+
+/* ======================================================
+   GRID — GAP ВСЕГДА РАБОТАЕТ
+====================================================== */
+
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+  width: 90vw;
+  max-width: 520px;
+  padding-bottom: 20px;
+}
+
+/* ======================================================
+   DAY — БЕЗ height / aspect-ratio
+====================================================== */
 
 .day {
+  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  padding-top: 100%;   /* <- магия квадрата */
   background-color: #414141;
   color: white;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
-  width: 60px;  /* Фиксированная ширина для контейнера */
-  height: 60px; /* Фиксированная высота для контейнера */
-  padding: 0; /* Убираем лишние отступы, чтобы сохранить фиксированный размер */
-  position: relative;
-  transition: background-color 0.3s;
 }
 
-.day:hover {
-  background-color: #957575;
+/* число центрируем поверх */
+.day > span,
+.day > div,
+.day > p {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Стили для типов отходов */
-.restabfall {
-  background-color: #e74c3c; /* Красный для restabfall */
+/* ======================================================
+   ЕСЛИ ЕСТЬ ИКОНКИ
+====================================================== */
+
+.day:has(.imagesContainer) {
+  font-size: 14px;
+  padding-top: 100%;
 }
 
-.altpapier {
-  background-color: #3ce756; /* Зеленый для altpapier */
-}
+/* ======================================================
+   TODAY — НЕ ЛОМАЕТ GRID
+====================================================== */
 
-.bioabfall {
-  background-color: #818aa2; /* Синий для bioabfall */
-}
-
-.schadstoff {
-  background-color: #ff9800; /* Оранжевый для schadstoff */
-}
-
-/* Стиль для выделения сегодняшнего дня */
 .today {
+  background-color: #f9e8e8;
   color: #200303;
-  font-size: 19px;
-  border: 2px solid transparent;
-  background-color: #f9e8e8; /* Оранжевый для сегодняшнего дня */
-  font-weight: bold; /* Сделаем текст жирным для выделения */
-  border-color: #e7e0e0; /* Яркая граница вокруг сегодняшнего дня */
-  box-shadow: 0 6px 9px rgba(255, 255, 255, 0.3); /* Более выраженная тень для сегодняшнего дня */
+  font-weight: bold;
+  border: 2px solid #e7e0e0;
 }
 
-/* Стили для изображений */
-.image {
-  width: 20px; /* Устанавливаем фиксированный размер */
-  height: 20px; /* Устанавливаем фиксированный размер */
-  object-fit: contain; /* Изображение не должно выходить за пределы */
-  display: block;
-  position: absolute; /* Позиционируем изображение относительно родительского контейнера */
-  top: 5px;  /* Позиция сверху */
-  right: 5px; /* Позиция справа */
+/* ======================================================
+   TYPES
+====================================================== */
+
+.restabfall { background-color: #e74c3c; }
+.altpapier  { background-color: #949e07; }
+.bioabfall  { background-color: #818aa2; }
+.schadstoff { background-color: #ff9800; }
+
+/* ======================================================
+   ICONS
+====================================================== */
+
+.imagesContainer {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  height: 18px;
 }
 
-/* Адаптация для маленьких экранов (например, смартфонов) */
-@media (max-width: 600px) {
-  .calendarContainer {
-    padding: 10px 0;
-  }
-
-  .monthNavigation {
-    width: 95vw;
-    margin-bottom: 15px;
-  }
-
-  .navButton {
-    padding: 6px 10px;
-    font-size: 14px;
-  }
-
-  .monthTitle {
-    font-size: 16px;
-  }
-
-  .monthGrid {
-    grid-template-columns: repeat(7, 1fr); /* 7 колонок */
-    grid-template-rows: repeat(5, 70px); /* 5 рядов с фиксированной высотой */
-    gap: clamp(0.125rem, -0.055rem + 0.74vw, 0.5rem); /* Отступы между квадратиками */
-  }
-
-  .day {
-    width: clamp(2.813rem, -0.047rem + 11.79vw, 4.375rem); /* Уменьшаем ширину для мобильных */
-    height: 50px; /* Уменьшаем высоту для мобильных */
-    font-size:clamp(0.75rem, 0.064rem + 2.83vw, 1.125rem)
-  }
-
-  .image {
-    width: 15px; /* Уменьшаем размер изображения */
-    height: 15px; /* Уменьшаем размер изображения */
-  }
-
-  .today {
-    font-size: 16px;
-  }
+.smallImage {
+  position: absolute;
+  width: 16px;
+  height: 16px;
 }
 
-/* Для экранов с шириной более 600px (например, ПК) */
-@media (min-width: 601px) {
-  .calendarContainer {
-    padding: 20px 0;
-  }
+.smallImage:nth-child(1) {
+  right: 0;
+}
 
-  .monthNavigation {
-    margin-bottom: 25px;
-  }
+.smallImage:nth-child(2) {
+  left: 0;
+}
 
-  .navButton {
-    padding: 10px 15px;
-    font-size: 18px;
-  }
+/* ======================================================
+   RESPONSIVE — ТОЛЬКО GAP И FONT
+====================================================== */
 
-  .monthTitle {
-    font-size: 20px;
-  }
+@media (max-width: 379px) {
+  .monthGrid { gap: 8px; }
+  .day { font-size: 12px; }
+}
 
-  .monthGrid {
-    grid-template-columns: repeat(7, 1fr); /* 7 колонок */
-    grid-template-rows: repeat(5, 1fr); /* 5 рядов */
-  }
+@media (min-width: 380px) and (max-width: 600px) {
+  .monthGrid { gap: 9px; }
+  .day { font-size: 14px; }
+}
 
-  .day {
-    width: clamp(4.063rem, 3.122rem + 2.5vw, 5rem);  /* Устанавливаем фиксированную ширину для квадратиков */
-    height: 70px; /* Устанавливаем фиксированную высоту для квадратиков */
-    font-size: 18px;
-  }
+@media (min-width: 601px) and (max-width: 1024px) {
+  .monthGrid { gap: 11px; }
+  .day { font-size: 16px; }
+}
 
-  .image {
-    width: 20px; /* Устанавливаем фиксированную ширину для изображений */
-    height: 20px; /* Устанавливаем фиксированную высоту для изображений */
-  }
+@media (min-width: 1025px) {
+  .monthGrid { gap: 14px; }
+  .day { font-size: 18px; }
 }

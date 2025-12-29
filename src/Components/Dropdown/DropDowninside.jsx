@@ -48,20 +48,35 @@ export default function DropDowninside({ date: schedules }) {
   const isCurrentMonth =
     monthIndex === currentMonthIndex && currentSchedule.year === currentYear;
 
-  const getClassNames = useCallback((day) => [
-    restabfall.days.includes(day) && s.restabfall,
-    altpapier.days.includes(day) && s.altpapier,
-    bioabfall.days.includes(day) && s.bioabfall,
-    schadstoff.days.includes(day) && s.schadstoff,
-    day === todayDay && isCurrentMonth && s.today
-  ].filter(Boolean).join(' '), []);
+  const getClassNames = useCallback((day) => {
+    let classNames = '';
+    if (restabfall.days.includes(day)) classNames += `${s.restabfall} `;
+    if (altpapier.days.includes(day)) classNames += `${s.altpapier} `;
+    if (bioabfall.days.includes(day)) classNames += `${s.bioabfall} `;
+    if (schadstoff.days.includes(day)) classNames += `${s.schadstoff} `;
+    if (day === todayDay && isCurrentMonth) classNames += `${s.today} `;
+    return classNames.trim();
+  }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days, todayDay, isCurrentMonth]);
 
-  const getImageForDay = useCallback((day) => {
-    if (restabfall.days.includes(day)) return allImg;
-    if (altpapier.days.includes(day)) return altpapierImg;
-    if (bioabfall.days.includes(day)) return bioImg;
-    if (schadstoff.days.includes(day)) return alle_Moll;
-    return null;
+  const getImagesForDay = useCallback((day) => {
+    const images = [];
+    if (restabfall.days.includes(day)) images.push(allImg);
+    if (altpapier.days.includes(day)) images.push(altpapierImg);
+    if (bioabfall.days.includes(day)) images.push(bioImg);
+    if (schadstoff.days.includes(day)) images.push(alle_Moll);
+    
+    // Отладка для дня 29
+    if (day === 29) {
+      console.log('Day 29 images:', images);
+      console.log('Day 29 data:', { 
+        restabfall: restabfall.days.includes(29),
+        altpapier: altpapier.days.includes(29),
+        bioabfall: bioabfall.days.includes(29),
+        schadstoff: schadstoff.days.includes(29)
+      });
+    }
+    
+    return images;
   }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days]);
 
   const hasData = useMemo(() => [
@@ -132,12 +147,16 @@ export default function DropDowninside({ date: schedules }) {
       <div className={s.monthGrid}>
         {Array.from({ length: daysInMonth }, (_, i) => {
           const day = i + 1;
-          const img = getImageForDay(day);
+          const images = getImagesForDay(day);
 
           return (
             <div key={day} className={`${s.day} ${getClassNames(day)}`}>
               {day}
-              {img && <img src={img} className={s.image} />}
+              <div className={s.imagesContainer}>
+                {images.map((img, index) => (
+                  <img key={index} src={img} className={s.smallImage} />
+                ))}
+              </div>
             </div>
           );
         })}
