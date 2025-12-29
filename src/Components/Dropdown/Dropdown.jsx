@@ -69,7 +69,7 @@ export default function Dropdown() {
 
         {/* Пример значений, можно сделать через список streets */}
         <option value="Mannheimer#43">Mannheimer Str 1 bis 67 und 2 bis 98</option>
-        <option value="Пушкина#1">Пушкина</option>
+    
       </select>
 
       <button type="submit">Отправить</button>

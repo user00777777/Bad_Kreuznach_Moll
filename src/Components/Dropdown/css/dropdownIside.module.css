@@ -9,6 +9,50 @@
   place-items: center; /* Центрируем элементы по горизонтали и вертикали */
 }
 
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.monthNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  max-width: 500px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.navButton {
+  background-color: #414141;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.navButton:hover:not(:disabled) {
+  background-color: #957575;
+}
+
+.navButton:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.monthTitle {
+  color: white;
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+}
 
 .day {
   display: flex;
@@ -42,6 +86,10 @@
   background-color: #818aa2; /* Синий для bioabfall */
 }
 
+.schadstoff {
+  background-color: #ff9800; /* Оранжевый для schadstoff */
+}
+
 /* Стиль для выделения сегодняшнего дня */
 .today {
   color: #200303;
@@ -66,6 +114,24 @@
 
 /* Адаптация для маленьких экранов (например, смартфонов) */
 @media (max-width: 600px) {
+  .calendarContainer {
+    padding: 10px 0;
+  }
+
+  .monthNavigation {
+    width: 95vw;
+    margin-bottom: 15px;
+  }
+
+  .navButton {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .monthTitle {
+    font-size: 16px;
+  }
+
   .monthGrid {
     grid-template-columns: repeat(7, 1fr); /* 7 колонок */
     grid-template-rows: repeat(5, 70px); /* 5 рядов с фиксированной высотой */
@@ -90,6 +156,23 @@
 
 /* Для экранов с шириной более 600px (например, ПК) */
 @media (min-width: 601px) {
+  .calendarContainer {
+    padding: 20px 0;
+  }
+
+  .monthNavigation {
+    margin-bottom: 25px;
+  }
+
+  .navButton {
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+
+  .monthTitle {
+    font-size: 20px;
+  }
+
   .monthGrid {
     grid-template-columns: repeat(7, 1fr); /* 7 колонок */
     grid-template-rows: repeat(5, 1fr); /* 5 рядов */
