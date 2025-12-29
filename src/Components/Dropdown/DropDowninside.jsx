@@ -64,18 +64,6 @@ export default function DropDowninside({ date: schedules }) {
     if (altpapier.days.includes(day)) images.push(altpapierImg);
     if (bioabfall.days.includes(day)) images.push(bioImg);
     if (schadstoff.days.includes(day)) images.push(alle_Moll);
-    
-    // Отладка для дня 29
-    if (day === 29) {
-      console.log('Day 29 images:', images);
-      console.log('Day 29 data:', { 
-        restabfall: restabfall.days.includes(29),
-        altpapier: altpapier.days.includes(29),
-        bioabfall: bioabfall.days.includes(29),
-        schadstoff: schadstoff.days.includes(29)
-      });
-    }
-    
     return images;
   }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days]);
 
@@ -151,7 +139,7 @@ export default function DropDowninside({ date: schedules }) {
 
           return (
             <div key={day} className={`${s.day} ${getClassNames(day)}`}>
-              {day}
+              <span>{day}</span>
               <div className={s.imagesContainer}>
                 {images.map((img, index) => (
                   <img key={index} src={img} className={s.smallImage} />
