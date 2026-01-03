@@ -96,10 +96,30 @@
 ====================================================== */
 
 .today {
-  background-color: #f9e8e8;
-  color: #200303;
+  background-color: transparent;
+  color: #fff;
   font-weight: bold;
-  border: 2px solid #e7e0e0;
+  border: 2px solid var(--accent-primary);
+  /* Blue border */
+  box-shadow: 0 0 10px var(--accent-glow);
+  /* Glow effect */
+  z-index: 10;
+}
+
+.heuteLabel {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: 800;
+  color: #ffffff;
+  /* White text as requested */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  /* Let clicks pass through */
 }
 
 /* ======================================================
@@ -128,8 +148,8 @@
 
 .imagesContainer {
   position: absolute;
-  top: 4px;
-  /* Adjust top/left if needed to not cover the number too much, but keeping user request priority */
+  top: 14px;
+  /* Moved down from 4px to make room for 'HEUTE' */
   left: 4px;
   right: 4px;
   height: 36px;

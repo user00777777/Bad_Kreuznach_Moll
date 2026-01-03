@@ -40,7 +40,7 @@ export default function DropDowninside({ date: schedules }) {
   const { restabfall, altpapier, bioabfall, schadstoff } = currentSchedule;
 
   const monthIndex = MONTH_S.indexOf(currentSchedule.month.toLowerCase());
-  const daysInMonth = useMemo(() => 
+  const daysInMonth = useMemo(() =>
     new Date(currentSchedule.year, monthIndex + 1, 0).getDate(),
     [currentSchedule.year, monthIndex]
   );
@@ -64,18 +64,18 @@ export default function DropDowninside({ date: schedules }) {
     if (altpapier.days.includes(day)) images.push(altpapierImg);
     if (bioabfall.days.includes(day)) images.push(bioImg);
     if (schadstoff.days.includes(day)) images.push(alle_Moll);
-    
+
     // Отладка для дня 29
     if (day === 29) {
       console.log('Day 29 images:', images);
-      console.log('Day 29 data:', { 
+      console.log('Day 29 data:', {
         restabfall: restabfall.days.includes(29),
         altpapier: altpapier.days.includes(29),
         bioabfall: bioabfall.days.includes(29),
         schadstoff: schadstoff.days.includes(29)
       });
     }
-    
+
     return images;
   }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days]);
 
@@ -129,11 +129,11 @@ export default function DropDowninside({ date: schedules }) {
         >
           ←
         </button>
-        
+
         <h3 className={s.monthTitle}>
           {MONTH_NAMES_RU[monthIndex]} {currentSchedule.year}
         </h3>
-        
+
         <button
           onClick={() => setDisplayedMonthIndex(i => Math.min(schedules.length - 1, i + 1))}
           disabled={displayedMonthIndex === schedules.length - 1}
@@ -143,7 +143,7 @@ export default function DropDowninside({ date: schedules }) {
           →
         </button>
       </div>
-      
+
       <div className={s.monthGrid}>
         {Array.from({ length: daysInMonth }, (_, i) => {
           const day = i + 1;
@@ -151,6 +151,7 @@ export default function DropDowninside({ date: schedules }) {
 
           return (
             <div key={day} className={`${s.day} ${getClassNames(day)}`}>
+              {day === todayDay && isCurrentMonth && <span className={s.heuteLabel}>HEUTE</span>}
               {day}
               <div className={s.imagesContainer}>
                 {images.map((img, index) => (
