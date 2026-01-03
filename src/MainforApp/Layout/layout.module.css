@@ -1,29 +1,51 @@
 .mainHeader {
   display: flex;
-  justify-content: center;  /* Центрирование по горизонтали */
-  align-items: center;      /* Центрирование по вертикали */
-  min-width: 100%;
-  min-height:max-content; 
-  background-color: green;
-  padding: 1% 0px; 
-  font-size: clamp(1rem, 0.818rem + 0.91vw, 1.5rem);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
 
+  background: rgba(15, 23, 42, 0.6);
+  /* Semi-transparent Slate 900 */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+
+.mainHeader a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  transition: all 0.3s ease;
+}
+
+.mainHeader a:hover {
+  text-shadow: 0 0 20px var(--accent-glow);
+  transform: scale(1.02);
 }
 
 .mainContainer {
-  font-family: sans-serif;
+  font-family: inherit;
   text-align: center;
-  width: 100%; /* Элемент будет занимать 100% ширины экрана */
-  height: 100vh; /* Высота будет подстраиваться по содержимому */
-  background-color: rgb(226, 185, 185);
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 80px;
+  /* Space for fixed header */
+  display: flex;
+  flex-direction: column;
+  /* Background is handled by body in index.css */
 }
 
-/* Медиазапрос для экранов шириной более 480px */
-@media (min-width: 481px) {
-  .mainContainer {
-    /* padding: 15px;  */
+@media (max-width: 480px) {
+  .mainHeader {
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
   }
-  .mainHeader{ padding: 5px}
 }
-
-   

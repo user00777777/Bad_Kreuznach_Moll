@@ -1,9 +1,23 @@
-.wrapHomepage{
+.wrapHomepage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    /* padding: 20px; */
-    background-color: #ce8282;
-    margin-bottom:10px ;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 4rem;
+
+    /* Animation */
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
