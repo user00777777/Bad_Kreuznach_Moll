@@ -153,7 +153,7 @@ export default function DropDowninside({ date: schedules }) {
             <div key={day} className={`${s.day} ${getClassNames(day)}`}>
               {day === todayDay && isCurrentMonth && <span className={s.heuteLabel}>HEUTE</span>}
               {day}
-              <div className={s.imagesContainer}>
+              <div className={`${s.imagesContainer} ${images.length > 1 ? s.multi : ''}`}>
                 {images.map((img, index) => (
                   <img key={index} src={img} className={s.smallImage} />
                 ))}

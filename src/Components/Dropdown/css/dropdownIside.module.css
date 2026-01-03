@@ -159,17 +159,46 @@
 .smallImage {
   position: absolute;
   width: 32px;
-  /* Doubled from 16px */
   height: 32px;
-  /* Doubled from 16px */
+  transition: all 0.2s ease;
 }
 
-.smallImage:nth-child(1) {
-  right: 0;
+/* Single image centering (default behavior adjustments if needed) */
+.imagesContainer:not(.multi) .smallImage {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.smallImage:nth-child(2) {
-  left: 0;
+/* Logic for multiple images (2 or more) */
+.multi .smallImage {
+  width: 22px;
+  /* Smaller size as requested */
+  height: 22px;
+  top: 6px;
+  /* Center vertical align in the 36px container */
+}
+
+.multi .smallImage:nth-child(1) {
+  right: 0px;
+  /* Push to far right */
+  left: auto;
+  transform: none;
+}
+
+.multi .smallImage:nth-child(2) {
+  left: 0px;
+  /* Push to far left */
+  right: auto;
+  transform: none;
+}
+
+/* Safety for 3 images if that ever happens */
+.multi .smallImage:nth-child(3) {
+  left: 50%;
+  transform: translateX(-50%);
+  top: -2px;
+  /* Stack slightly above? or just hide */
+  z-index: 5;
 }
 
 /* ======================================================
