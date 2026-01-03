@@ -14,7 +14,8 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
+  /* Reduced from 1.5rem to minimize empty space */
   box-sizing: border-box;
   /* Handle padding correctly */
 }
@@ -40,6 +41,8 @@
   color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
+  margin-top: 0;
+  /* Ensure no top margin */
 }
 
 .container select {

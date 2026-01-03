@@ -34,6 +34,11 @@ export default function DropDowninside({ date: schedules }) {
     initialIndex >= 0 ? initialIndex : 0
   );
 
+  // Clear selected holiday when changing months
+  useEffect(() => {
+    setSelectedHoliday(null);
+  }, [displayedMonthIndex]);
+
   const currentSchedule = schedules[displayedMonthIndex];
   if (!currentSchedule) return null;
 
@@ -45,6 +50,58 @@ export default function DropDowninside({ date: schedules }) {
     [currentSchedule.year, monthIndex]
   );
 
+  // Holidays Database (Major German Holidays)
+  const HOLIDAYS = {
+    // 2025
+    "25-12-2025": { de: "1. Weihnachtstag", ru: "Первый день Рождества" },
+    "26-12-2025": { de: "2. Weihnachtstag", ru: "Второй день Рождества" },
+
+    // 2026
+    "1-1-2026": { de: "Neujahr", ru: "Новый год" },
+    "3-4-2026": { de: "Karfreitag", ru: "Страстная пятница" },
+    "6-4-2026": { de: "Ostermontag", ru: "Пасхальный понедельник" },
+    "1-5-2026": { de: "Tag der Arbeit", ru: "День труда" },
+    "14-5-2026": { de: "Christi Himmelfahrt", ru: "Вознесение Христово" },
+    "25-5-2026": { de: "Pfingstmontag", ru: "Троицкий понедельник" },
+    "3-10-2026": { de: "Tag der Deutschen Einheit", ru: "День германского единства" },
+    "25-12-2026": { de: "1. Weihnachtstag", ru: "Первый день Рождества" },
+    "26-12-2026": { de: "2. Weihnachtstag", ru: "Второй день Рождества" }
+  };
+
+  const [selectedHoliday, setSelectedHoliday] = useState(null); // Stores { de, ru, dateStr } or null
+  const [holidayLang, setHolidayLang] = useState('de');
+
+  const getHoliday = (day, monthIndex, year) => {
+    // monthIndex is 0-based
+    const dateStr = `${day}-${monthIndex + 1}-${year}`;
+    return HOLIDAYS[dateStr] ? { ...HOLIDAYS[dateStr], dateStr } : null;
+  };
+
+  const dayHasHoliday = (day) => {
+    return !!getHoliday(day, monthIndex, currentSchedule.year);
+  };
+
+  const handleDayClick = (day) => {
+    const holiday = getHoliday(day, monthIndex, currentSchedule.year);
+    if (holiday) {
+      if (selectedHoliday && selectedHoliday.dateStr === holiday.dateStr) {
+        // If clicking same holiday, toggle language or close? User asked to toggle on click.
+        // Let's implement: Click calendar to open. Click info box to toggle lang.
+        // If click calendar again -> Re-open/Keep open.
+        setSelectedHoliday(holiday);
+      } else {
+        setSelectedHoliday(holiday);
+        setHolidayLang('de'); // Reset to German on new selection
+      }
+    } else {
+      setSelectedHoliday(null);
+    }
+  };
+
+  const toggleHolidayLang = () => {
+    setHolidayLang(prev => prev === 'de' ? 'ru' : 'de');
+  };
+
   const isCurrentMonth =
     monthIndex === currentMonthIndex && currentSchedule.year === currentYear;
 
@@ -55,8 +112,9 @@ export default function DropDowninside({ date: schedules }) {
     if (bioabfall.days.includes(day)) classNames += `${s.bioabfall} `;
     if (schadstoff.days.includes(day)) classNames += `${s.schadstoff} `;
     if (day === todayDay && isCurrentMonth) classNames += `${s.today} `;
+    if (dayHasHoliday(day)) classNames += `${s.holiday} `;
     return classNames.trim();
-  }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days, todayDay, isCurrentMonth]);
+  }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days, todayDay, isCurrentMonth, monthIndex, currentSchedule.year]);
 
   const getImagesForDay = useCallback((day) => {
     const images = [];
@@ -64,18 +122,6 @@ export default function DropDowninside({ date: schedules }) {
     if (altpapier.days.includes(day)) images.push(altpapierImg);
     if (bioabfall.days.includes(day)) images.push(bioImg);
     if (schadstoff.days.includes(day)) images.push(alle_Moll);
-
-    // Отладка для дня 29
-    if (day === 29) {
-      console.log('Day 29 images:', images);
-      console.log('Day 29 data:', {
-        restabfall: restabfall.days.includes(29),
-        altpapier: altpapier.days.includes(29),
-        bioabfall: bioabfall.days.includes(29),
-        schadstoff: schadstoff.days.includes(29)
-      });
-    }
-
     return images;
   }, [restabfall.days, altpapier.days, bioabfall.days, schadstoff.days]);
 
@@ -150,9 +196,22 @@ export default function DropDowninside({ date: schedules }) {
           const images = getImagesForDay(day);
 
           return (
-            <div key={day} className={`${s.day} ${getClassNames(day)}`}>
+            <div
+              key={day}
+              className={`${s.day} ${getClassNames(day)}`}
+              onClick={() => handleDayClick(day)}
+            >
               {day === todayDay && isCurrentMonth && <span className={s.heuteLabel}>HEUTE</span>}
-              {day}
+
+              {dayHasHoliday(day) ? (
+                <>
+                  <span className={s.holidayIcon}>🎇</span>
+                  <span className={s.holidayNumber}>{day}</span>
+                </>
+              ) : (
+                day
+              )}
+
               <div className={`${s.imagesContainer} ${images.length > 1 ? s.multi : ''}`}>
                 {images.map((img, index) => (
                   <img key={index} src={img} className={s.smallImage} />
@@ -162,6 +221,17 @@ export default function DropDowninside({ date: schedules }) {
           );
         })}
       </div>
+
+      {/* Holiday Info Box */}
+      {selectedHoliday && (
+        <div
+          className={s.holidayInfo}
+          onClick={toggleHolidayLang}
+          title="Klicken zum Übersetzen / Нажмите для перевода"
+        >
+          🎉 {selectedHoliday[holidayLang]}
+        </div>
+      )}
     </div>
   );
 }

@@ -106,6 +106,44 @@
   z-index: 10;
 }
 
+.holiday {
+  /* Subtle red background for the entire cell */
+  background-color: rgba(239, 68, 68, 0.15);
+  /* Soft Red */
+  border-radius: 8px;
+  /* Slight rounding */
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* Fix specificity: .day>span (0-1-1) was overriding these (0-1-0) */
+.day .holidayNumber {
+  position: absolute;
+  inset: auto;
+  /* Reset inset:0 from generic span rule */
+  bottom: 6px;
+  right: 6px;
+  font-weight: 700;
+  color: inherit;
+  font-size: 1.2em;
+  line-height: 1;
+  display: block;
+  /* Override display:flex */
+  width: auto;
+  /* Reset width:auto if needed */
+  height: auto;
+}
+
+.day .holidayIcon {
+  position: absolute;
+  inset: auto;
+  top: 2px;
+  right: 2px;
+  font-size: 0.8em;
+  pointer-events: none;
+  display: block;
+}
+
 .heuteLabel {
   position: absolute;
   top: 2px;
@@ -115,11 +153,9 @@
   font-size: 0.6em;
   font-weight: 800;
   color: #ffffff;
-  /* White text as requested */
   text-transform: uppercase;
   letter-spacing: 0.5px;
   pointer-events: none;
-  /* Let clicks pass through */
 }
 
 /* ======================================================
